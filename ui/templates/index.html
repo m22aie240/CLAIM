@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAIM - Major Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            height: 100px;
+            margin-right: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-container {
+            margin: 0 auto;
+            max-width: 400px;
+        }
+        .result-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="CLAIM Logo">
+        <h1>CLAIM</h1>
+    </div>
+    <h2>Major Project on SDE submitted by PG Students at IIT Jodhpur</h2>
+    <p>Students: Mohit Chandra Saxena, Abhishek Tamrakar, Ayush Mishra</p>
+    <div class="form-container">
+        <form action="/analyze" method="post">
+            <label for="repo_url">Repository URL:</label><br>
+            <input type="text" id="repo_url" name="repo_url" required>
+            <br><br>
+            <button type="submit">Analyze</button>
+        </form>
+    </div>
+    <div class="result-container">
+        {% if result %}
+            <h2>Result:</h2>
+            <pre>{{ result | tojson(indent=2) }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>
+

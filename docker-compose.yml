@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  repository-miner-service:
+    build: ./repository_miner
+    ports:
+      - "5001:5001"
+    networks:
+      - claim_default
+  
+  file-parser-service:
+    build: ./file_parser
+    ports:
+      - "5002:5002"
+    networks:
+      - claim_default
+  
+  heuristic-service:
+    build: ./heuristic_identifier
+    ports:
+      - "5003:5003"
+    networks:
+      - claim_default
+  
+  metadata-storage:
+    build: ./metadata_storage
+    ports:
+      - "5004:5004"
+    networks:
+      - claim_default
+  
+  api-gateway:
+    build: ./api_gateway
+    ports:
+      - "5000:5000"
+    networks:
+      - claim_default
+  
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - claim_default
+
+  ui:
+    build: ./ui
+    ports:
+      - "5005:5005"
+    networks:
+      - claim_default
+
+networks:
+  claim_default:
+    driver: bridge
